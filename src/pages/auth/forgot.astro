@@ -1,0 +1,22 @@
+
+---
+import AuthLayout from '@/layouts/AuthLayout.astro';
+---
+<AuthLayout title="Mot de passe oublié">
+  <h1 class="text-2xl font-bold mb-6">Réinitialiser le mot de passe</h1>
+  <form id="form" class="grid gap-4">
+    <div><label class="label" for="email">Email</label><input id="email" class="input" type="email" required /></div>
+    <button class="btn btn-brand" type="submit">Envoyer le lien</button>
+  </form>
+  <script type="module">
+    import '/src/lib/firebase.client.ts';
+    import { reset } from '/src/controllers/authController.ts';
+    const form = document.getElementById('form');
+    form.addEventListener('submit', async (e)=>{
+      e.preventDefault();
+      const email = document.getElementById('email').value;
+      try { await reset(email); alert('Email envoyé'); }
+      catch(err){ alert('Erreur'); console.error(err); }
+    });
+  </script>
+</AuthLayout>

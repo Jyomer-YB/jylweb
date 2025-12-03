@@ -1,0 +1,97 @@
+{
+  "layout": {
+    "headerBadge": "Website Studio",
+    "logoTitle": "jyLWeb",
+    "mainKicker": "Website Studio",
+    "login": "Log in",
+    "registerCta": "Start for free",
+    "dashboard": "My dashboard",
+    "logout": "Log out",
+    "poweredBy": "© {year} jyLWeb — powered by Jyomer",
+    "footerRight": "Website Studio · jyLWeb",
+    "defaultTitle": "jyLWeb"
+  },
+  "home": {
+    "hero": {
+      "pageTitle": "Create your showcase website without writing a single line of code",
+      "pageSubtitle": "jyLWeb combines several OpenAI models to generate a clean Astro static site, 100% tailored to your business.",
+      "badge": "Website Studio",
+      "h2Part1": "Generate a static website",
+      "h2Highlight": "100% tailored",
+      "h2Part3": "in just a few minutes.",
+      "lead": "You answer a few questions, jyLWeb orchestrates AI models for positioning, content, structure and code, and delivers an Astro ZIP ready to deploy to GitHub, Vercel, Netlify or your own server.",
+      "ctaPrimary": "Start for free",
+      "ctaSecondary": "See how it works",
+      "features": {
+        "leftTitle": "Unlimited sites",
+        "leftText": "Generate as many variations as you want, jyLWeb keeps a full history so you can re-download everything.",
+        "rightTitle": "Own your code",
+        "rightText": "You get 100% of the static files (HTML/CSS/assets), with no lock-in."
+      },
+      "previewLabel": "Generated hero",
+      "previewBusinessName": "Photo studio — Casablanca",
+      "previewText": "\"We capture the light behind every story.\" AI-generated copy, fully editable before export.",
+      "previewPillPrimary": "Primary button · “Book a session”",
+      "previewPillSecondary": "“Portfolio” section created automatically",
+      "previewCodeLabel": "Astro component"
+    },
+    "workflow": {
+      "kicker": "Workflow",
+      "title": "From a few answers to a ZIP ready to deploy.",
+      "body": "jyLWeb chains specialized AI models: business understanding, page structure, copywriting, then generation of clean Astro components.",
+      "step1Title": "1 · Ultra-simple questionnaire",
+      "step1Body": "Describe your business, your tone of voice, your colors and your goals (appointments, sales, branding…).",
+      "step2Title": "2 · Content & structure AI",
+      "step2Body": "jyLWeb generates sections, headings, paragraphs and CTAs tailored to your business, with an SEO-friendly structure.",
+      "step3Title": "3 · Astro ZIP export",
+      "step3Body": "You get a ready-to-use ZIP: Astro files, static HTML, CSS, assets. You can modify everything and version it on Git."
+    },
+    "forWho": {
+      "kicker": "Use cases",
+      "title": "Designed for freelancers, studios, agencies & small brands.",
+      "f1Title": "Freelancers & creatives",
+      "f1Body": "Designers, devs, photographers… launch a clean portfolio in one evening, without spending 3 days writing copy.",
+      "f2Title": "Agencies & studios",
+      "f2Body": "Quickly create solid website bases for your clients, then refine and plug them into your pipeline.",
+      "f3Title": "Small businesses & side projects",
+      "f3Body": "Restaurants, coaches, clubs, side-projects… a clear, modern showcase site that’s easy to maintain."
+    },
+    "stack": {
+      "kicker": "Tech stack",
+      "title": "Astro, OpenAI API and Tailwind, without black magic.",
+      "s1Title": "Static Astro",
+      "s1Body": "Ultra-fast pages, easy to host anywhere (Netlify, Vercel, GitHub Pages, Nginx server…).",
+      "s2Title": "Orchestrated OpenAI",
+      "s2Body": "Multiple prompts: persona, structure, wording, then component generation. Not just a simple “chat” with HTML.",
+      "s3Title": "Dev-friendly",
+      "s3Body": "Clean, organized code you can version, refactor and turn into internal templates for your agency or clients."
+    }
+  },
+  "dashboard": {
+    "pageTitle": "Dashboard",
+    "welcomeTitle": "Welcome to jyLWeb",
+    "welcomeBody": "Generate your showcase website in a few minutes.",
+    "openGenerator": "Open generator",
+    "creditsLabel": "Credits left",
+    "historyButton": "View history",
+    "buyCreditsTitle": "Buy credits",
+    "amountLabel": "Credits to purchase",
+    "paypalHint": "You will pay via PayPal (card or PayPal balance). Minimum purchase is 3 credits.",
+    "minCreditsError": "Minimum purchase is 3 credits.",
+    "purchaseSuccess": "Payment completed. Your credits have been updated.",
+    "purchaseError": "Payment failed or cancelled. Please try again."
+  },
+  "history": {
+    "pageTitle": "Sites history",
+    "introTitle": "Generated sites",
+    "introBody": "Find here the sites you’ve already generated. You can re-download the ZIP or reopen them later.",
+    "empty": "No site generated yet.",
+    "untitled": "Untitled site",
+    "templateLabel": "Template",
+    "languageLabel": "Language",
+    "open": "Reopen",
+    "zip": "ZIP",
+    "zipError": "ZIP error"
+  }
+
+}

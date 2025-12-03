@@ -1,0 +1,151 @@
+---
+import AppLayout from "../../layouts/AppLayout.astro";
+---
+
+<AppLayout
+  title="Connexion"
+  subtitle="Accédez à votre espace jyLWeb pour générer vos sites statiques."
+>
+  <div class="flex min-h-[70vh] items-center justify-center px-4 py-12 sm:px-6 lg:px-8">
+    <div class="auth-card space-y-6" data-animate>
+      <header class="space-y-2 text-center">
+        <p class="text-[11px] uppercase tracking-[0.3em] text-slate-400">
+          jyLWeb · Auth
+        </p>
+        <h2 class="text-xl font-semibold text-slate-50">
+          Se connecter
+        </h2>
+        <p class="muted">
+          Entrez votre email et votre mot de passe jyLWeb.
+        </p>
+      </header>
+
+      <div class="space-y-4" id="login-box">
+        <div>
+          <label for="email" class="label">Adresse e-mail</label>
+          <input
+            id="email"
+            type="email"
+            autocomplete="email"
+            class="input"
+            placeholder="vous@exemple.com"
+          />
+        </div>
+
+        <div>
+          <div class="mb-1.5 flex items-center justify-between">
+            <label for="password" class="label mb-0">Mot de passe</label>
+            <a href="/auth/reset" class="link text-[11px]">
+              Mot de passe oublié ?
+            </a>
+          </div>
+          <input
+            id="password"
+            type="password"
+            autocomplete="current-password"
+            class="input"
+            placeholder="••••••••"
+          />
+        </div>
+
+        <!-- Bouton visible et stylé -->
+        <button
+          type="button"
+          id="login-btn"
+          class="btn btn-brand w-full mt-2"
+        >
+          Continuer
+        </button>
+      </div>
+
+      <p class="muted text-center">
+        Pas encore de compte ?
+        <a href="/auth/register" class="link">
+          Créer un compte
+        </a>
+      </p>
+
+      <p
+        id="login-error"
+        class="help-text text-center text-xs text-red-400 hidden"
+      >
+        Erreur de connexion. Vérifiez vos identifiants.
+      </p>
+    </div>
+  </div>
+
+  <script type="module">
+    import { login } from "/src/controllers/authController";
+
+    window.addEventListener("DOMContentLoaded", () => {
+      const emailInput = document.getElementById("email");
+      const passwordInput = document.getElementById("password");
+      const loginBtn = document.getElementById("login-btn");
+      const errorEl = document.getElementById("login-error");
+
+      console.log("[jyLWeb] DOM chargé, script login initialisé");
+
+      function showError(message) {
+        if (errorEl) {
+          errorEl.textContent =
+            message || "Erreur de connexion. Vérifiez vos identifiants.";
+          errorEl.classList.remove("hidden");
+        } else {
+          alert(message || "Erreur de connexion");
+        }
+      }
+
+      function hideError() {
+        if (errorEl) errorEl.classList.add("hidden");
+      }
+
+      async function handleLogin() {
+        hideError();
+
+        const email =
+          emailInput && "value" in emailInput && emailInput.value
+            ? emailInput.value.trim()
+            : "";
+        const password =
+          passwordInput && "value" in passwordInput && passwordInput.value
+            ? passwordInput.value
+            : "";
+
+        if (!email || !password) {
+          showError("Merci de renseigner email et mot de passe.");
+          return;
+        }
+
+        console.log("[jyLWeb] Tentative de login pour", email);
+
+        try {
+          // 1) Firebase + /api/session
+          await login(email, password);
+          console.log("[jyLWeb] Login OK, redirection…");
+
+          const params = new URLSearchParams(window.location.search);
+          const redirectTo = params.get("redirectTo") ?? "/app";
+          window.location.href = redirectTo;
+        } catch (err) {
+          console.error("[jyLWeb] Login error", err);
+          showError("Identifiants invalides ou erreur de serveur.");
+        }
+      }
+
+      if (loginBtn) {
+        loginBtn.addEventListener("click", handleLogin);
+      } else {
+        console.warn("[jyLWeb] #login-btn introuvable");
+      }
+
+      if (passwordInput) {
+        passwordInput.addEventListener("keydown", (e) => {
+          if (e.key === "Enter") {
+            e.preventDefault();
+            handleLogin();
+          }
+        });
+      }
+    });
+  </script>
+</AppLayout>

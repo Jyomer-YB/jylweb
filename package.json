@@ -1,0 +1,33 @@
+{
+  "name": "jylweb-mvc",
+  "version": "1.0.1",
+  "type": "module",
+  "scripts": {
+    "dev": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview"
+  },
+  "dependencies": {
+    "@astrojs/node": "9.4.6",
+    "@astrojs/react": "^4.4.2",
+    "@astrojs/tailwind": "5.1.5",
+    "astro": "^5.15.9",
+    "autoprefixer": "10.4.22",
+    "firebase": "^11.10.0",
+    "firebase-admin": "^13.6.0",
+    "firebase-functions": "^7.0.0",
+    "jose": "^6.1.2",
+    "jszip": "^3.10.1",
+    "openai": "^4.104.0",
+    "postcss": "8.5.6",
+    "react": "^19.2.0",
+    "react-dom": "^19.2.0",
+    "tailwindcss": "3.4.18",
+    "zod": "3.25.76"
+  },
+  "devDependencies": {
+    "@types/react": "^19.2.4",
+    "@types/react-dom": "^19.2.3",
+    "typescript": "^5.6.3"
+  }
+}

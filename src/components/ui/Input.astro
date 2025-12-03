@@ -1,0 +1,6 @@
+
+---
+const { label, type = 'text', id, name, value = '' } = Astro.props;
+---
+<label class="label" for={id}>{label}</label>
+<input class="input" type={type} id={id} name={name} value={value} />

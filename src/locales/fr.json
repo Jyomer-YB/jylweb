@@ -1,0 +1,97 @@
+{
+  "layout": {
+    "headerBadge": "Studio de sites vitrines",
+    "logoTitle": "jyLWeb",
+    "mainKicker": "Studio de sites vitrines",
+    "login": "Se connecter",
+    "registerCta": "Commencer gratuitement",
+    "dashboard": "Mon espace",
+    "logout": "Se déconnecter",
+    "poweredBy": "© {year} jyLWeb — propulsé par Jyomer",
+    "footerRight": "Studio de sites vitrines · jyLWeb",
+    "defaultTitle": "jyLWeb"
+  },
+  "home": {
+    "hero": {
+      "pageTitle": "Créez votre site vitrine sans écrire une seule ligne de code",
+      "pageSubtitle": "jyLWeb assemble plusieurs modèles IA d’OpenAI pour générer un site Astro statique, propre et 100 % adapté à ton activité.",
+      "badge": "Website Studio",
+      "h2Part1": "Génère un site statique",
+      "h2Highlight": "100 % personnalisé",
+      "h2Part3": "en quelques minutes.",
+      "lead": "Tu réponds à quelques questions, jyLWeb orchestre les modèles IA (positionnement, contenu, structure, code) et te livre un ZIP Astro prêt à être poussé sur GitHub, Vercel, Netlify ou ton propre serveur.",
+      "ctaPrimary": "Commencer gratuitement",
+      "ctaSecondary": "Voir comment ça marche",
+      "features": {
+        "leftTitle": "Sites illimités",
+        "leftText": "Génère autant de variantes que tu veux, jyLWeb garde l’historique pour tout re-télécharger.",
+        "rightTitle": "Code propriétaire",
+        "rightText": "Tu récupères 100 % des fichiers statiques (HTML/CSS/Assets), sans lock-in."
+      },
+      "previewLabel": "Hero généré",
+      "previewBusinessName": "Studio photo — Casablanca",
+      "previewText": "“Nous capturons la lumière derrière chaque histoire.” Texte généré par l’IA, modifiable avant export.",
+      "previewPillPrimary": "Bouton principal · “Réserver une session”",
+      "previewPillSecondary": "Section “Portfolio” générée automatiquement",
+      "previewCodeLabel": "Composant Astro"
+    },
+    "workflow": {
+      "kicker": "Workflow",
+      "title": "De quelques réponses à un ZIP prêt à être déployé.",
+      "body": "jyLWeb enchaîne plusieurs modèles IA spécialisés : compréhension métier, structure de page, copywriting, puis génération de composants Astro propres.",
+      "step1Title": "1 · Questionnaire ultra-simple",
+      "step1Body": "Tu décris ton activité, ton ton de voix, tes couleurs et tes objectifs (prise de rendez-vous, ventes, branding…).",
+      "step2Title": "2 · IA de contenu + structure",
+      "step2Body": "jyLWeb génère sections, titres, paragraphes et CTA adaptés à ton business, avec une structure SEO-friendly.",
+      "step3Title": "3 · Export ZIP Astro",
+      "step3Body": "Tu récupères un ZIP prêt à l’emploi : fichiers Astro, HTML statique, CSS, assets. Tu peux tout modifier et versionner sur Git."
+    },
+    "forWho": {
+      "kicker": "Use cases",
+      "title": "Pensé pour les freelances, studios, agences & petites marques.",
+      "f1Title": "Freelances & créatifs",
+      "f1Body": "Designers, devs, photographes… lance ton portfolio propre en une soirée, sans passer 3 jours à écrire le contenu.",
+      "f2Title": "Agences & studios",
+      "f2Body": "Crée rapidement des bases de sites pour tes clients, que tu peux ensuite affiner et pousser dans ton pipeline.",
+      "f3Title": "TPE & projets perso",
+      "f3Body": "Restaurants, coachs, clubs, side-projects… un site vitrine clair, moderne, facile à maintenir."
+    },
+    "stack": {
+      "kicker": "Stack technique",
+      "title": "Astro, OpenAI API et Tailwind, sans magie noire.",
+      "s1Title": "Astro statique",
+      "s1Body": "Pages ultra rapides, faciles à héberger partout (Netlify, Vercel, GitHub Pages, serveur Nginx…).",
+      "s2Title": "OpenAI orchestré",
+      "s2Body": "Plusieurs prompts : persona, structure, wording, puis génération de composants. Pas juste un simple “chat” avec du HTML.",
+      "s3Title": "Dev-friendly",
+      "s3Body": "Code propre, organisé, que tu peux versionner, factoriser, transformer en template interne pour ton agence ou tes clients."
+    }
+  },
+  "dashboard": {
+    "pageTitle": "Tableau de bord",
+    "welcomeTitle": "Bienvenue sur jyLWeb",
+    "welcomeBody": "Génère ton site vitrine en quelques minutes.",
+    "openGenerator": "Ouvrir le générateur",
+    "creditsLabel": "Crédits restants",
+    "historyButton": "Voir l’historique",
+    "buyCreditsTitle": "Acheter des crédits",
+    "amountLabel": "Crédits à acheter",
+    "paypalHint": "Paiement via PayPal (carte bancaire ou solde PayPal). Minimum 3 crédits.",
+    "minCreditsError": "Le minimum d'achat est de 3 crédits.",
+    "purchaseSuccess": "Paiement effectué. Vos crédits ont été mis à jour.",
+    "purchaseError": "Paiement annulé ou échoué. Veuillez réessayer."
+  },
+  "history": {
+    "pageTitle": "Historique des sites",
+    "introTitle": "Sites générés",
+    "introBody": "Retrouve ici les sites que tu as déjà générés. Tu peux re-télécharger le ZIP ou les ré-ouvrir plus tard.",
+    "empty": "Aucun site généré pour le moment.",
+    "untitled": "Site sans nom",
+    "templateLabel": "Template",
+    "languageLabel": "Langue",
+    "open": "Ré-ouvrir",
+    "zip": "ZIP",
+    "zipError": "Erreur lors de la génération du ZIP."
+  }
+
+}

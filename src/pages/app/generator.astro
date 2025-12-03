@@ -1,0 +1,698 @@
+---
+import AppLayout from "../../layouts/AppLayout.astro";
+---
+
+<AppLayout
+  title="Générateur de site"
+  subtitle="Décris ton projet, jyLWeb assemble les modèles IA pour créer ton site Astro prêt à l'emploi."
+>
+  <div class="grid gap-8 md:grid-cols-[minmax(0,1.4fr)_minmax(0,1.1fr)]">
+    <!-- Colonne gauche : formulaire -->
+    <section class="space-y-6" data-animate>
+      <header class="space-y-2">
+        <p class="text-[11px] uppercase tracking-[0.32em] text-slate-400">
+          Étape 1 · Brief de base
+        </p>
+        <h2 class="text-lg font-semibold text-slate-50">
+          Parle-nous de ton site
+        </h2>
+        <p class="muted">
+          Quelques questions simples pour que l'IA comprenne ton activité et ton style.
+        </p>
+      </header>
+
+      <form id="generator-form" class="space-y-4">
+        <!-- Type de site -->
+        <div>
+          <label class="label">Type de site</label>
+          <select
+            name="siteType"
+            class="input bg-slate-900/70"
+            required
+          >
+            <option value="landing">Landing page</option>
+            <option value="portfolio">Portfolio</option>
+            <option value="restaurant">Restaurant</option>
+            <option value="ecommerce">E-commerce</option>
+            <option value="blog">Blog</option>
+            <option value="autre">Autre</option>
+          </select>
+        </div>
+
+        <!-- Nom / slogan -->
+        <div class="grid gap-4 md:grid-cols-2">
+          <div>
+            <label class="label">Nom de la marque</label>
+            <input
+              name="brandName"
+              class="input"
+              placeholder="Ex : Jyomer Studio"
+              required
+            />
+          </div>
+          <div>
+            <label class="label">Slogan (optionnel)</label>
+            <input
+              name="slogan"
+              class="input"
+              placeholder="Ex : Think, Create & Go"
+            />
+          </div>
+        </div>
+
+        <!-- Objectif -->
+        <div>
+          <label class="label">Objectif principal</label>
+          <textarea
+            name="goal"
+            class="input min-h-[70px]"
+            placeholder="Ex : générer des leads qualifiés pour mon service de développement mobile."
+            required
+          ></textarea>
+        </div>
+
+        <!-- Cible + ton -->
+        <div class="grid gap-4 md:grid-cols-2">
+          <div>
+            <label class="label">Cible</label>
+            <input
+              name="targetAudience"
+              class="input"
+              placeholder="Ex : TPE/PME e-commerce au Maroc"
+              required
+            />
+          </div>
+          <div>
+            <label class="label">Ton du site</label>
+            <select
+              name="tone"
+              class="input bg-slate-900/70"
+              required
+            >
+              <option value="serieux">Sérieux & pro</option>
+              <option value="friendly">Friendly & accessible</option>
+              <option value="luxe">Premium / luxe</option>
+              <option value="minimal">Minimal & clean</option>
+            </select>
+          </div>
+        </div>
+
+        <!-- Sections souhaitées -->
+        <div>
+          <label class="label">Sections souhaitées</label>
+          <div class="flex flex-wrap gap-2 text-[11px]">
+            <label class="inline-flex items-center gap-1">
+              <input type="checkbox" name="sectionsWanted" value="hero" checked />
+              <span>Hero</span>
+            </label>
+            <label class="inline-flex items-center gap-1">
+              <input type="checkbox" name="sectionsWanted" value="about" />
+              <span>À propos</span>
+            </label>
+            <label class="inline-flex items-center gap-1">
+              <input type="checkbox" name="sectionsWanted" value="services" />
+              <span>Services</span>
+            </label>
+            <label class="inline-flex items-center gap-1">
+              <input type="checkbox" name="sectionsWanted" value="testimonials" />
+              <span>Témoignages</span>
+            </label>
+            <label class="inline-flex items-center gap-1">
+              <input type="checkbox" name="sectionsWanted" value="faq" />
+              <span>FAQ</span>
+            </label>
+            <label class="inline-flex items-center gap-1">
+              <input type="checkbox" name="sectionsWanted" value="contact" />
+              <span>Contact</span>
+            </label>
+          </div>
+        </div>
+
+        <!-- Logo / images -->
+        <div class="grid gap-4 md:grid-cols-2">
+          <div>
+            <label class="label">URL du logo (optionnel)</label>
+            <input
+              name="logoUrl"
+              class="input"
+              placeholder="https://..."
+            />
+          </div>
+          <div class="space-y-2">
+            <label class="label">Images</label>
+            <input
+              name="imageUrls"
+              class="input"
+              placeholder="URLs (optionnel) · https://img1..., https://img2..."
+            />
+            <input
+              id="imageFiles"
+              name="imageFiles"
+              type="file"
+              multiple
+              accept="image/*"
+              class="block w-full text-xs text-slate-200 file:mr-3 file:rounded-md file:border-0 file:bg-slate-800 file:px-3 file:py-1.5 file:text-[11px] file:font-medium file:text-slate-100 hover:file:bg-slate-700"
+            />
+            <p class="text-[10px] text-slate-500">
+              Tu peux soit coller des URLs, soit ajouter des fichiers images. Les fichiers seront uploadés dans ton espace jyLWeb.
+            </p>
+          </div>
+        </div>
+
+        <!-- Couleurs / langue -->
+        <div class="grid gap-4 md:grid-cols-2">
+          <div>
+            <label class="label">Notes sur les couleurs</label>
+            <input
+              name="colorNotes"
+              class="input"
+              placeholder="Ex : bleu du logo jyLWeb + gris foncé"
+            />
+          </div>
+          <div>
+            <label class="label">Langue du site</label>
+            <select
+              name="locale"
+              class="input bg-slate-900/70"
+              required
+            >
+              <option value="fr">Français</option>
+              <option value="en">Anglais</option>
+            </select>
+          </div>
+        </div>
+
+        <!-- Bouton -->
+        <div class="pt-2">
+          <button
+            id="btn-generate-brief"
+            type="submit"
+            class="btn btn-brand px-5 py-2 text-[11px]"
+          >
+            Générer le brief IA
+          </button>
+          <p
+            id="generator-error"
+            class="mt-2 text-xs text-red-400 hidden"
+          >
+            Une erreur est survenue. Merci de réessayer.
+          </p>
+        </div>
+      </form>
+    </section>
+
+    <!-- Colonne centrale : Étape 2 -->
+    <section
+      id="step2-panel"
+      class="mt-6 space-y-3 rounded-2xl border border-slate-800/70 bg-slate-950/60 p-4 md:p-5 hidden"
+      data-animate
+    >
+      <header class="flex items-center justify-between gap-2">
+        <div>
+          <p class="text-[11px] uppercase tracking-[0.32em] text-slate-400">
+            Étape 2
+          </p>
+          <h3 class="text-sm font-medium text-slate-50">
+            Générer le site complet
+          </h3>
+          <p class="muted text-xs">
+            Choisis un style global, puis laisse jyLWeb générer un projet Astro prêt à télécharger.
+          </p>
+        </div>
+      </header>
+
+      <div class="mt-3 grid gap-3 md:grid-cols-[minmax(0,1.5fr)_minmax(0,1fr)]">
+        <div class="space-y-3">
+          <label class="block text-[11px] font-medium text-slate-300">
+            Style du site
+            <select
+              id="templateChoice"
+              class="mt-1 w-full rounded-md border border-slate-700 bg-slate-900/80 px-2 py-1.5 text-xs text-slate-50"
+            >
+              <option value="pro">Pro · Sobre & corporate</option>
+              <option value="minimal">Minimal · Clean & aéré</option>
+              <option value="boutique">Boutique · E-commerce simple</option>
+              <option value="creative">Créatif · Sections hero fortes</option>
+            </select>
+          </label>
+        </div>
+
+        <div class="flex flex-col items-start justify-end gap-2 w-full">
+          <button
+            id="build-btn"
+            type="button"
+            class="inline-flex items-center gap-2 rounded-full bg-emerald-500 px-4 py-1.5 text-xs font-semibold text-emerald-950 hover:bg-emerald-400 disabled:opacity-60"
+          >
+            Générer le site complet
+          </button>
+
+          <!-- Barre de progression -->
+          <div
+            id="build-progress-wrapper"
+            class="mt-2 w-full hidden"
+          >
+            <div class="h-1.5 w-full rounded-full bg-slate-800/80">
+              <div
+                id="build-progress-bar"
+                class="h-1.5 rounded-full bg-emerald-500 transition-[width] duration-300"
+                style="width: 0%;"
+              ></div>
+            </div>
+            <p
+              id="build-progress-text"
+              class="mt-1 text-[11px] text-slate-400"
+            >
+              Préparation du projet...
+            </p>
+          </div>
+
+          <!-- Bouton de téléchargement, affiché seulement à la fin -->
+          <button
+            id="download-btn"
+            type="button"
+            class="mt-1 inline-flex items-center gap-2 rounded-full bg-slate-100 px-4 py-1.5 text-xs font-semibold text-slate-900 hover:bg-white"
+          >
+            Télécharger le projet (ZIP)
+          </button>
+
+          <p
+            id="build-status"
+            class="text-[11px] text-slate-400 hidden"
+          ></p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Colonne droite : aperçu du siteBrief -->
+    <aside
+      class="space-y-4 rounded-2xl border border-slate-800/70 bg-slate-950/60 p-4 md:p-5"
+      data-animate
+    >
+      <header class="space-y-1">
+        <p class="text-[11px] uppercase tracking-[0.32em] text-slate-400">
+          Aperçu IA
+        </p>
+        <h3 class="text-sm font-medium text-slate-50">
+          Brief généré
+        </h3>
+        <p class="muted text-xs">
+          Une fois le brief généré, tu verras ici le pitch, les pages et les sections que l'IA propose.
+        </p>
+      </header>
+
+      <div
+        id="brief-loading"
+        class="hidden text-xs text-slate-400"
+      >
+        Génération du brief en cours...
+      </div>
+
+      <div
+        id="brief-empty"
+        class="text-xs text-slate-500"
+      >
+        Remplis le formulaire à gauche puis clique sur <strong>Générer le brief IA</strong>.
+      </div>
+
+      <div
+        id="brief-result"
+        class="hidden space-y-3 text-xs"
+      >
+        <div>
+          <p class="text-[10px] font-semibold uppercase tracking-[0.22em] text-slate-400">
+            Pitch
+          </p>
+          <p id="brief-elevator" class="mt-1 text-slate-100"></p>
+        </div>
+
+        <div>
+          <p class="text-[10px] font-semibold uppercase tracking-[0.22em] text-slate-400">
+            Bénéfices clés
+          </p>
+          <ul
+            id="brief-benefits"
+            class="mt-1 list-disc space-y-0.5 pl-4 text-slate-200"
+          ></ul>
+        </div>
+
+        <div>
+          <p class="text-[10px] font-semibold uppercase tracking-[0.22em] text-slate-400">
+            Pages
+          </p>
+          <ul
+            id="brief-pages"
+            class="mt-1 space-y-1 text-slate-200"
+          ></ul>
+        </div>
+
+        <div>
+          <p class="text-[10px] font-semibold uppercase tracking-[0.22em] text-slate-400">
+            CTA principal
+          </p>
+          <p id="brief-cta" class="mt-1 text-slate-100"></p>
+        </div>
+      </div>
+    </aside>
+  </div>
+
+  <script type="module">
+    import { uploadImageFiles, auth } from "/src/lib/firebase.client.ts";
+    
+    let lastBrief = null;
+    let lastZipUrl = null;
+
+    // 🔐 Helper pour POST + token Firebase
+    async function postWithAuth(path, payload) {
+    const user = auth.currentUser;   // ✅ on réutilise l'auth importé
+
+    if (!user) {
+      // Session expirée → on renvoie vers le login
+      window.location.href = "/auth/login";
+      throw new Error("UNAUTHENTICATED");
+    }
+
+    const idToken = await user.getIdToken(true);
+
+    return fetch(path, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${idToken}`,
+      },
+      body: JSON.stringify(payload),
+    });
+  }
+
+    async function uploadImagesFromInput(inputEl) {
+      if (!inputEl || !inputEl.files?.length) return [];
+
+      try {
+        return await uploadImageFiles(Array.from(inputEl.files));
+      } catch (err) {
+        console.error("[jyLWeb] Upload images failed", err);
+        alert("Impossible d'envoyer les images pour l'instant. On continue sans les images.");
+        return [];
+      }
+    }
+
+    async function handleSubmit(event) {
+      event.preventDefault();
+
+      const form = event.currentTarget;
+      const errorEl = document.getElementById("generator-error");
+      const loadingEl = document.getElementById("brief-loading");
+      const emptyEl = document.getElementById("brief-empty");
+      const resultEl = document.getElementById("brief-result");
+
+      const elevatorEl = document.getElementById("brief-elevator");
+      const benefitsEl = document.getElementById("brief-benefits");
+      const pagesEl = document.getElementById("brief-pages");
+      const ctaEl = document.getElementById("brief-cta");
+
+      const imageFilesInput = document.getElementById("imageFiles");
+
+      if (errorEl) {
+        errorEl.classList.add("hidden");
+        errorEl.textContent = "Une erreur est survenue. Merci de réessayer.";
+      }
+      if (resultEl) resultEl.classList.add("hidden");
+      if (emptyEl) emptyEl.classList.add("hidden");
+      if (loadingEl) loadingEl.classList.remove("hidden");
+
+      const formData = new FormData(form);
+      const sectionsWanted = formData.getAll("sectionsWanted");
+
+      // 1) Upload des fichiers vers Firebase (si présents)
+      let uploadedImageUrls = [];
+      try {
+        if (imageFilesInput) {
+          uploadedImageUrls = await uploadImagesFromInput(imageFilesInput);
+        }
+      } catch (e) {
+        console.warn("[jyLWeb] Upload images failed", e);
+      }
+
+      // 2) Récupérer aussi les URLs texte
+      const textUrls = String(formData.get("imageUrls") || "")
+        .split(",")
+        .map((x) => x.trim())
+        .filter(Boolean);
+
+      const body = {
+        siteType: formData.get("siteType") || "landing",
+        brandName: formData.get("brandName") || "",
+        slogan: formData.get("slogan") || "",
+        goal: formData.get("goal") || "",
+        tone: formData.get("tone") || "serieux",
+        targetAudience: formData.get("targetAudience") || "",
+        sectionsWanted,
+        logoUrl: formData.get("logoUrl") || "",
+        imageUrls: [...uploadedImageUrls, ...textUrls],
+        colorNotes: formData.get("colorNotes") || "",
+        locale: formData.get("locale") || "fr",
+      };
+
+      try {
+        // 🔐 Utilisation de postWithAuth → /api/generator/start (1 crédit)
+        const res = await postWithAuth("/api/generator/start", body);
+
+        const text = await res.text();
+        let json;
+        try {
+          json = JSON.parse(text);
+        } catch {
+          throw new Error("Réponse non JSON: " + text);
+        }
+
+        if (!res.ok || !json.ok) {
+          // On propage l'erreur pour le catch
+          throw new Error(json.error || "API error");
+        }
+
+        const brief = json.siteBrief;
+        lastBrief = brief;
+
+        // Débloquer l'étape 2
+        const step2Panel = document.getElementById("step2-panel");
+        if (step2Panel) {
+          step2Panel.classList.remove("hidden");
+        }
+
+        if (loadingEl) loadingEl.classList.add("hidden");
+        if (resultEl) resultEl.classList.remove("hidden");
+
+        if (elevatorEl) elevatorEl.textContent = brief.elevatorPitch || "";
+        if (ctaEl) ctaEl.textContent = brief.mainCTA || "";
+
+        if (benefitsEl) {
+          benefitsEl.innerHTML = "";
+          (brief.keyBenefits || []).forEach((b) => {
+            const li = document.createElement("li");
+            li.textContent = b;
+            benefitsEl.appendChild(li);
+          });
+        }
+
+        if (pagesEl) {
+          pagesEl.innerHTML = "";
+          (brief.pages || []).forEach((p) => {
+            const li = document.createElement("li");
+            li.className =
+              "rounded-lg border border-slate-800/60 bg-slate-900/40 p-2";
+
+            const sectionLabels = (p.sections || [])
+              .map((s) => {
+                if (typeof s === "string") return s;
+                return s.title || s.slug || "";
+              })
+              .filter(Boolean)
+              .join(", ");
+
+            li.innerHTML =
+              "<span class='font-semibold text-slate-50'>" +
+              (p.title || p.slug) +
+              "</span>" +
+              (sectionLabels
+                ? " · <span class='text-slate-300 text-[11px]'>sections : " +
+                  sectionLabels +
+                  "</span>"
+                : "");
+
+            pagesEl.appendChild(li);
+          });
+        }
+      } catch (err) {
+        console.error("[jyLWeb] generator start error", err);
+        if (loadingEl) loadingEl.classList.add("hidden");
+        if (resultEl) resultEl.classList.add("hidden");
+        if (emptyEl) emptyEl.classList.remove("hidden");
+
+        if (errorEl) {
+          const msg = String(err?.message || err || "");
+          if (msg.includes("NOT_ENOUGH_CREDITS")) {
+            errorEl.textContent =
+              "Tu n'as pas assez de crédits pour générer le brief IA. Va sur le Dashboard pour recharger.";
+          } else if (msg.includes("UNAUTHENTICATED")) {
+            errorEl.textContent =
+              "Ta session a expiré. Merci de te reconnecter.";
+          } else {
+            errorEl.textContent =
+              "Une erreur est survenue. Merci de réessayer.";
+          }
+          errorEl.classList.remove("hidden");
+        }
+      }
+    }
+
+    function startFakeProgress() {
+      const wrapper = document.getElementById("build-progress-wrapper");
+      const bar = document.getElementById("build-progress-bar");
+      const text = document.getElementById("build-progress-text");
+
+      if (!wrapper || !bar || !text) return null;
+
+      wrapper.classList.remove("hidden");
+      bar.style.width = "5%";
+      text.textContent = "Préparation du projet (5%)...";
+
+      let current = 5;
+
+      const intervalId = setInterval(() => {
+        current = Math.min(current + 5, 90);
+        bar.style.width = current + "%";
+        text.textContent = `Génération en cours (${current}%)...`;
+      }, 500);
+
+      return { intervalId, bar, text };
+    }
+
+    function stopFakeProgress(handler, success) {
+      const statusEl = document.getElementById("build-status");
+      if (!handler) return;
+
+      clearInterval(handler.intervalId);
+
+      if (handler.bar && handler.text) {
+        handler.bar.style.width = success ? "100%" : "0%";
+        handler.text.textContent = success
+          ? "Génération terminée (100%)."
+          : "Échec de la génération.";
+      }
+
+      if (statusEl) {
+        statusEl.classList.remove("hidden");
+        statusEl.textContent = success
+          ? "✅ Projet généré. Tu peux maintenant télécharger le ZIP."
+          : "❌ Erreur pendant la génération du site.";
+      }
+    }
+
+    async function handleBuildClick() {
+      if (!lastBrief) {
+        alert("Commence par générer le brief IA.");
+        return;
+      }
+
+      const buildBtn = document.getElementById("build-btn");
+      const downloadBtn = document.getElementById("download-btn");
+      const statusEl = document.getElementById("build-status");
+      const templateSelect = document.getElementById("templateChoice");
+      const template = templateSelect?.value || "pro";
+
+      if (downloadBtn) {
+        downloadBtn.classList.add("hidden");
+      }
+      if (statusEl) {
+        statusEl.classList.add("hidden");
+        statusEl.textContent = "";
+      }
+
+      if (buildBtn) {
+        buildBtn.disabled = true;
+        buildBtn.classList.add("opacity-60");
+      }
+
+      const progressHandler = startFakeProgress();
+
+      try {
+        // 🔐 Utilisation de postWithAuth → /api/generator/build (2 crédits)
+        const res = await postWithAuth("/api/generator/build", {
+          brief: lastBrief,
+          template,
+        });
+
+        if (!res.ok) {
+          const txt = await res.text();
+          let parsed = null;
+          try {
+            parsed = JSON.parse(txt);
+          } catch (e) {
+            // ce n'est pas du JSON, on laisse l'erreur générique
+          }
+
+          if (parsed && parsed.error === "NOT_ENOUGH_CREDITS") {
+            stopFakeProgress(progressHandler, false);
+            alert(
+              "Tu n'as pas assez de crédits pour générer le site complet (2 crédits requis)."
+            );
+            return;
+          }
+
+          throw new Error("Erreur API build: " + txt);
+        }
+
+        const blob = await res.blob();
+
+        const url = URL.createObjectURL(blob);
+        if (lastZipUrl) {
+          URL.revokeObjectURL(lastZipUrl);
+        }
+        lastZipUrl = url;
+
+        stopFakeProgress(progressHandler, true);
+
+        const downloadBtn2 = document.getElementById("download-btn");
+        if (downloadBtn2) {
+          downloadBtn2.classList.remove("hidden");
+        }
+      } catch (err) {
+        console.error("[jyLWeb] build error", err);
+        stopFakeProgress(progressHandler, false);
+      } finally {
+        if (buildBtn) {
+          buildBtn.disabled = false;
+          buildBtn.classList.remove("opacity-60");
+        }
+      }
+    }
+
+    function handleDownloadClick() {
+      if (!lastZipUrl) {
+        alert("Aucun fichier généré pour l'instant.");
+        return;
+      }
+
+      const a = document.createElement("a");
+      a.href = lastZipUrl;
+      a.download = "site-jylweb.zip";
+      document.body.appendChild(a);
+      a.click();
+      a.remove();
+    }
+
+    const buildBtn = document.getElementById("build-btn");
+    if (buildBtn) {
+      buildBtn.addEventListener("click", handleBuildClick);
+    }
+
+    const downloadBtn = document.getElementById("download-btn");
+    if (downloadBtn) {
+      downloadBtn.addEventListener("click", handleDownloadClick);
+    }
+
+    const formEl = document.getElementById("generator-form");
+    if (formEl) {
+      formEl.addEventListener("submit", handleSubmit);
+    }
+  </script>
+</AppLayout>

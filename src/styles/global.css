@@ -1,0 +1,183 @@
+/* stylelint-disable at-rule-no-unknown */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+/* stylelint-enable at-rule-no-unknown */
+
+/* Palette jyLWeb (inspirée du logo) */
+:root {
+  --bg-main: #020617;        /* fond très sombre */
+  --bg-card: #020617;
+  --border-subtle: rgba(148, 163, 184, 0.22);
+  --accent: #2563eb;         /* bleu jyLWeb */
+  --accent-soft: rgba(37, 99, 235, 0.16);
+  --text-main: #e5e7eb;
+  --text-muted: #9ca3af;
+}
+
+/* Fond global avec halos bleus (utilisé avec la classe bg-jylweb) */
+.bg-jylweb {
+  background:
+    radial-gradient(circle at top, rgba(37, 99, 235, 0.25), transparent 58%),
+    radial-gradient(circle at bottom, rgba(37, 99, 235, 0.16), transparent 60%),
+    #020617;
+}
+
+/* Cartes génériques (auth + panneaux) */
+.card {
+  @apply rounded-2xl border border-slate-800/70 bg-slate-950/80 shadow-[0_22px_60px_rgba(15,23,42,0.95)] backdrop-blur-2xl;
+}
+
+/* Boutons */
+.btn {
+  @apply inline-flex items-center justify-center rounded-full px-4 py-2 text-xs font-semibold tracking-wide transition-all duration-200;
+}
+
+.btn-brand {
+  @apply bg-blue-600 text-white shadow-[0_0_24px_rgba(37,99,235,0.9)];
+}
+
+.btn-brand:hover {
+  @apply bg-blue-500;
+  box-shadow: 0 0 40px rgba(37, 99, 235, 1);
+}
+
+.btn-brand:active {
+  transform: translateY(1px) scale(0.98);
+}
+
+.btn-ghost {
+  @apply border border-slate-700/60 bg-slate-900/40 text-slate-200;
+}
+
+.btn-ghost:hover {
+  @apply border-slate-500/80 bg-slate-800/80;
+}
+
+/* Formulaire */
+.label {
+  @apply mb-1.5 block text-xs font-medium text-slate-300;
+}
+
+.input {
+  @apply w-full rounded-xl border border-slate-700/70 bg-slate-900/60 px-3 py-2 text-sm text-slate-100 outline-none transition-colors placeholder:text-slate-500;
+}
+
+.input:focus {
+  @apply border-blue-500/80 ring-1 ring-blue-500/60;
+}
+
+/* Liens de navigation (header) */
+.nav-link {
+  @apply relative text-[11px] uppercase tracking-[0.28em] text-slate-400/90;
+}
+
+.nav-link::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -0.35rem;
+  width: 0;
+  height: 1px;
+  border-radius: 999px;
+  background: linear-gradient(
+    90deg,
+    rgba(59, 130, 246, 0.0),
+    rgba(59, 130, 246, 1)
+  );
+  transition: width 220ms ease-out;
+}
+
+.nav-link:hover {
+  @apply text-slate-100;
+}
+
+.nav-link:hover::after {
+  width: 100%;
+}
+
+/* Glow pour certains textes */
+.glow-text {
+  text-shadow:
+    0 0 18px rgba(37, 99, 235, 0.9),
+    0 0 55px rgba(37, 99, 235, 0.85);
+}
+
+/* Badge (petits tags) */
+.jy-badge {
+  @apply inline-flex items-center gap-1 rounded-full px-2.5 py-1 text-[11px] font-medium;
+  background: var(--accent-soft);
+  color: #bfdbfe;
+}
+
+/* Panneaux glassmorphism (hero, etc.) */
+.glass-panel {
+  background:
+    radial-gradient(circle at top left, rgba(37, 99, 235, 0.12), transparent 55%),
+    rgba(15, 23, 42, 0.9);
+  border: 1px solid var(--border-subtle);
+  box-shadow:
+    0 0 0 1px rgba(15, 23, 42, 1),
+    0 26px 70px rgba(15, 23, 42, 0.95);
+  backdrop-filter: blur(26px);
+}
+
+/* Animations scroll */
+[data-animate] {
+  opacity: 0;
+  transform: translateY(24px) scale(0.98);
+  transition:
+    opacity 650ms cubic-bezier(0.22, 0.61, 0.36, 1),
+    transform 650ms cubic-bezier(0.22, 0.61, 0.36, 1);
+}
+
+[data-animate].is-visible {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+}
+
+/* ---------- Auth forms : meilleure lisibilité ---------- */
+
+/* Conteneur générique pour les pages d'auth */
+.auth-shell {
+  @apply flex min-h-[calc(100vh-4rem-4rem)] items-center justify-center;
+}
+
+/* Carte d'auth (utilise les mêmes principes que .card, mais avec plus de contraste interne) */
+.auth-card {
+  @apply w-full max-w-md rounded-2xl border border-slate-700/80 bg-slate-950/95 px-6 py-7 shadow-[0_26px_80px_rgba(15,23,42,0.98)] backdrop-blur-xl;
+}
+
+.auth-card h1,
+.auth-card h2,
+.auth-card label,
+.auth-card p,
+.auth-card a {
+  @apply text-slate-100;
+}
+
+/* Labels + petits textes */
+.auth-card p.muted,
+.auth-card small,
+.auth-card .help-text {
+  @apply text-xs text-slate-400;
+}
+
+/* Inputs dans les formulaires d'auth */
+.auth-card input {
+  @apply text-sm text-slate-100;
+}
+
+.auth-card input::placeholder {
+  @apply text-slate-500;
+}
+
+/* Bouton principal d'auth */
+.auth-card button[type="submit"] {
+  @apply w-full btn btn-brand;
+}
+
+/* Liens secondaires (mot de passe oublié, switch login/register) */
+.auth-card a.link {
+  @apply text-xs font-medium text-blue-300 hover:text-blue-200;
+}

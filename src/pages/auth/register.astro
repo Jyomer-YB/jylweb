@@ -1,0 +1,95 @@
+---
+import AppLayout from "../../layouts/AppLayout.astro";
+---
+
+<AppLayout
+  title="Création de compte"
+  subtitle="Créez votre compte jyLWeb et commencez à générer vos sites."
+>
+  <div class="flex min-h-[70vh] items-center justify-center px-4 py-12 sm:px-6 lg:px-8">
+    <div class="auth-card space-y-6" data-animate>
+      <header class="space-y-2 text-center">
+        <p class="text-[11px] uppercase tracking-[0.3em] text-slate-400">
+          jyLWeb · Auth
+        </p>
+        <h2 class="text-xl font-semibold text-slate-50">
+          Créer un compte
+        </h2>
+        <p class="muted">
+          Utilisez un email que vous contrôlez. Vous pourrez le vérifier plus tard.
+        </p>
+      </header>
+
+      <form id="register-form" class="space-y-4">
+        <div>
+          <label for="email" class="label">Adresse e-mail</label>
+          <input
+            id="email"
+            name="email"
+            type="email"
+            required
+            autocomplete="email"
+            class="input"
+            placeholder="vous@exemple.com"
+          />
+        </div>
+
+        <div>
+          <label for="password" class="label">Mot de passe</label>
+          <input
+            id="password"
+            name="password"
+            type="password"
+            required
+            autocomplete="new-password"
+            class="input"
+            placeholder="••••••••"
+          />
+        </div>
+
+        <button type="submit">
+          Créer mon compte
+        </button>
+      </form>
+
+      <p class="muted text-center">
+        Vous avez déjà un compte ?
+        <a href="/auth/login" class="link">
+          Se connecter
+        </a>
+      </p>
+
+      <p id="register-error" class="help-text text-center text-xs text-red-400 hidden">
+        Erreur lors de la création du compte. Essayez avec un autre email.
+      </p>
+    </div>
+  </div>
+
+  <script type="module">
+    import { register } from "/src/controllers/authController";
+
+    const form = document.getElementById("register-form");
+    const errorEl = document.getElementById("register-error");
+
+    if (form) {
+      form.addEventListener("submit", async (event) => {
+        event.preventDefault();
+        if (errorEl) errorEl.classList.add("hidden");
+
+        const data = new FormData(form);
+        const email = String(data.get("email") || "");
+        const password = String(data.get("password") || "");
+
+        try {
+          await register(email, password);
+
+          // Après inscription, on peut envoyer direct sur /app
+          window.location.href = "/app";
+        } catch (err) {
+          console.error("Register error", err);
+          if (errorEl) errorEl.classList.remove("hidden");
+        }
+      });
+    }
+  </script>
+</AppLayout>
